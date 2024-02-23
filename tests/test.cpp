@@ -13,7 +13,7 @@ TEST(String, CopyString)
     char* str = CopyString(p);
     p = "hello, world!";
 
-    ASSERT_EQ(strlen(str), 10);
+    ASSERT_EQ(strlen(str), 11);
     EXPECT_EQ(str[0], 's');
     EXPECT_EQ(str[1], 'o');
     EXPECT_EQ(str[2], 'm');
@@ -36,7 +36,7 @@ TEST(String, ConcatenateStrings)
 
     char* str = ConcatenateStrings(a, b);
 
-    ASSERT_EQ(strlen(str), 11);
+    ASSERT_EQ(strlen(str), 12);
     EXPECT_EQ(str[0], 'h');
     EXPECT_EQ(str[1], 'e');
     EXPECT_EQ(str[2], 'l');
@@ -62,9 +62,9 @@ TEST(Matrix, Construct) {
   EXPECT_EQ(m.height, 10);
 
   for (size_t i = 0; i < 10; ++i) {
-    for (size_t j = 0; j < 10; ++j) {
-      EXPECT_EQ(m.data[i][j], 0);
-    }
+   for (size_t j = 0; j < 10; ++j) {
+     EXPECT_EQ(m.data[i][j], 0);
+   }
   }
   Destruct(m);
   EXPECT_EQ(m.data, nullptr);
@@ -139,8 +139,8 @@ TEST(Matrix, Eq) {
   EXPECT_EQ(m, c2);
   EXPECT_EQ(m2, c);
 
-  c[0][1] = 3;
-  c[1][0] = 0;
+  c.data[0][1] = 3;
+  c.data[1][0] = 0;
   EXPECT_NE(c, m2);
 
   Destruct(m);
@@ -152,10 +152,10 @@ TEST(Matrix, Eq) {
 TEST(Matrix, Add) {
   Matrix m;
   Construct(m, 2, 2);
-  m.data_[0][0] = 1;
-  m.data_[0][1] = 2;
-  m.data_[1][0] = 3;
-  m.data_[1][1] = 4;
+  m.data[0][0] = 1;
+  m.data[0][1] = 2;
+  m.data[1][0] = 3;
+  m.data[1][1] = 4;
 
   Matrix c = Copy(m);
 
@@ -167,7 +167,7 @@ TEST(Matrix, Add) {
   EXPECT_EQ(s, s2);
 
   ASSERT_EQ(s.width, 2);
-  ASSERT_EQ(s.heigth, 2);
+  ASSERT_EQ(s.height, 2);
   EXPECT_EQ(s.data[0][0], 2);
   EXPECT_EQ(s.data[0][1], 4);
   EXPECT_EQ(s.data[1][0], 6);
@@ -190,7 +190,7 @@ TEST(Matrix, AddEmpty) {
 
   EXPECT_EQ(s.data, nullptr);
   EXPECT_EQ(s.width, 0);
-  EXPECT_EQ(s.heigth, 0);
+  EXPECT_EQ(s.height, 0);
 
   Matrix uninit;
 
@@ -222,7 +222,7 @@ TEST(Matrix, Sub) {
   Matrix s = Sub(m, c);
 
   ASSERT_EQ(s.width, 2);
-  ASSERT_EQ(s.heigth, 2);
+  ASSERT_EQ(s.height, 2);
   EXPECT_EQ(s.data[0][0], 0);
   EXPECT_EQ(s.data[0][1], 0);
   EXPECT_EQ(s.data[1][0], 0);
@@ -231,7 +231,7 @@ TEST(Matrix, Sub) {
 
   s = Sub(c, c);
   ASSERT_EQ(s.width, 2);
-  ASSERT_EQ(s.heigth, 2);
+  ASSERT_EQ(s.height, 2);
   EXPECT_EQ(s.data[0][0], 0);
   EXPECT_EQ(s.data[0][1], 0);
   EXPECT_EQ(s.data[1][0], 0);
@@ -332,19 +332,19 @@ TEST(Matrix, MultEmpty) {
 
   EXPECT_EQ(s.data, nullptr);
   EXPECT_EQ(s.width, 0);
-  EXPECT_EQ(s.heigth, 0);
+  EXPECT_EQ(s.height, 0);
 
   Destruct(s);
   Matrix uninit;
   s = Mult(uninit, m);
   EXPECT_EQ(s.data, nullptr);
   EXPECT_EQ(s.width, 0);
-  EXPECT_EQ(s.heigth, 0);
+  EXPECT_EQ(s.height, 0);
 
   s = Mult(m, uninit);
   EXPECT_EQ(s.data, nullptr);
   EXPECT_EQ(s.width, 0);
-  EXPECT_EQ(s.heigth, 0);
+  EXPECT_EQ(s.height, 0);
 
   Destruct(m);
   Destruct(c);

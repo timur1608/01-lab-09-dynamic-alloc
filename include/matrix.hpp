@@ -20,7 +20,7 @@ Matrix Add(const Matrix& a, const Matrix& b);
 Matrix Sub(const Matrix& a, const Matrix& b);
 Matrix Mult(const Matrix& a, const Matrix& b);
 
-void Transposition(Matrix& matrix);
+void Transpose(Matrix& matrix);
 
 bool operator==(const Matrix& a, const Matrix& b);
 
